@@ -41,9 +41,9 @@ def sendEmail(url, message):
     发送邮件到指定邮箱地址
     '''
     mailHost = "smtp.126.com"
-    mailUser = "huaisha1224@126.com"
-    mailPassword = "1qaz2wsx"
-    toMail = "279478776@qq.com"
+    mailUser = "user****@126.com"
+    mailPassword = "password******"
+    toMail = "usr@qq.com"
     subject = message
     msg = msg = MIMEMultipart("alternative")
     msg["Subject"] = Header(subject,"utf-8")
