@@ -71,5 +71,5 @@ if __name__ == "__main__":
     for x in hongbao.weiboHongBaoList():
         #print x
         weiboHongBao(x)
-    sendEmail("http://www.hiadmin.org","OK")
+    #sendEmail("http://www.hiadmin.org","OK")
 
