@@ -5,6 +5,7 @@
 import requests
 import re
 import smtplib
+import ConfigParser
 from email.mime.text import MIMEText
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
@@ -40,16 +41,22 @@ def sendEmail(url, message):
     '''
     发送邮件到指定邮箱地址
     '''
-    mailHost = "smtp.126.com"
-    mailUser = "user****@126.com"
-    mailPassword = "password******"
-    toMail = "usr@qq.com"
+    #获取配置信息
+    cf = ConfigParser.ConfigParser()
+    cf.read("config.ini")
+    mailHost = cf.get("info", "mailHost")
+    mailUser = cf.get("info", "mailUser")
+    mailPassword = cf.get("info", "mailPassword")
+    toMail = cf.get("info", "toMail")
+
+    #设置邮件信息
     subject = message
     msg = msg = MIMEMultipart("alternative")
     msg["Subject"] = Header(subject,"utf-8")
     part = MIMEText(subject +';'+ url,"html") #设置以html格式发送内容
     msg.attach(part)
 
+    #发送邮件
     smtp = smtplib.SMTP()
     smtp.connect(mailHost) 
     smtp.login(mailUser,mailPassword) 
@@ -60,19 +67,9 @@ def sendEmail(url, message):
 
 
 if __name__ == "__main__":
-    # url = [
-    #     "http://huodong.weibo.com/hongbao/1610436341", #神州租车
-    #     "http://huodong.weibo.com/hongbao/2411842134", #360
-    #     "http://huodong.weibo.com/hongbao/1830346007", #易到用车
-    #     "http://huodong.weibo.com/hongbao/1768198384", #天猫
-    #     "http://huodong.weibo.com/hongbao/1935767654" #测试红包
-
-    # for i in url:
-    #     #print i
-    #     weiboHongBao(i)
-
     import hongbao
     for x in hongbao.weiboHongBaoList():
         #print x
         weiboHongBao(x)
+    sendEmail("http://www.hiadmin.org","OK")
 
