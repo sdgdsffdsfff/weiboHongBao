@@ -30,3 +30,8 @@ config.ini配置文件说明
     mailPassword = *******      ；发送邮件密码
     toMail = *******@qq.com     ；接收邮件的账号
 
+
+注意事项
+------------
+    1.  config.ini必须是utf-8无bom格式
+    2.  Python版本为2.7.5
